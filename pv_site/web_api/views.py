@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Yield
@@ -17,6 +17,8 @@ class YieldViewSet(viewsets.ModelViewSet):
     http_method_names = ["get"]
     queryset = Yield.objects.all()
     serializer_class = YieldSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ["plz"]
 
 
 @api_view(["GET"])

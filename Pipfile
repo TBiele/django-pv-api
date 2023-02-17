@@ -19,6 +19,7 @@ sqlparse = "*"
 tomli = "*"
 whitenoise = "*"
 psycopg2-binary = "*"
+django-filter = "*"
 
 [dev-packages]
 black = "*"
