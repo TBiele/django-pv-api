@@ -14,16 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import include, path
-from rest_framework import routers
 from pv_site.web_api import views
-
-router = routers.DefaultRouter()
-router.register(r"api/yields", views.YieldViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-    path("", include(router.urls)),
-    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
-    path("api/pv_yield/", views.get_pv_yield),
+    path("", views.ApiRootView.as_view(), name="api-root"),
+    path("api/yields/", views.YieldViewSet.as_view({"get": "list"}), name="yield-list"),
+    path("api/pv_yield", views.get_pv_yield, name="get-pv-yield"),
 ]
